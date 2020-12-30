@@ -48,25 +48,22 @@ carImg = pygame.image.load('beniz.png')
 screen.blit(carImg, (player_x, player_y))
 pygame.display.update()
 player_1 = Player(player_x,player_y,width,height)
+pygame.key.set_repeat(100,100)
 while (True):
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 player_1.left()
-                screen.fill(background_color)
-            elif event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT:
                 player_1.right()
-                screen.fill(background_color)
-            elif event.key == pygame.K_UP:
+            if event.key == pygame.K_UP:
                 player_1.up()
-                screen.fill(background_color)
-            elif event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN:
                 player_1.down()
-                screen.fill(background_color)
             elif event.key == pygame.K_ESCAPE:
                 sys.exit()
 
-
+        screen.fill(background_color)
         screen.blit(carImg, (player_1.x, player_1.y))
         pygame.display.update()
 
