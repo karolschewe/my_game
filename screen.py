@@ -11,3 +11,13 @@ class Screen:
         self.carImg = pygame.image.load('beniz.png')
         self.screen.blit(self.carImg, (player_x, player_y))
         pygame.display.update()
+
+    #change resolution
+    def change_resolution(self, width,height):
+        self.width = width
+        self.height = height
+        player_x = width / 2
+        player_y = height / 2
+        self.screen = pygame.display.set_mode((width, height))
+        self.carImg = pygame.image.load('beniz.png')
+        self.screen.blit(self.carImg, (player_x, player_y))

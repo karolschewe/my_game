@@ -9,6 +9,7 @@ class Player:
         self.player_size_x = player_size_x
         self.player_size_y = player_size_y
         self.speed = 1
+    # moving player avatar
     def up(self):
         if self.y > 0:
             self.y = self.y - 1
@@ -30,3 +31,11 @@ class Player:
             self.x = self.x + 1
         else:
             self.x = self.window_width - self.player_size_x
+    #changing speed
+    def speed_me_up(self,percentage):
+        self.speed = self.speed * percentage
+
+    # updating window size
+    def update_widow_size(self,window_width,window_height):
+        self.window_width = window_width
+        self.window_height = window_height
