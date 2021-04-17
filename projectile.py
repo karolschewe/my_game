@@ -11,42 +11,42 @@ class Projectile:
         self.x = owner.x + owner.size_x / 2
         self.y = owner.y + owner.size_y / 2
         # projectile starting velocity
-        self.v_x = round(owner.moving_right * owner.speed*1.1 + owner.moving_left * -owner.speed*1.1)
-        self.v_y = round(owner.moving_up * -owner.speed*1.1 + owner.moving_down * owner.speed*1.1)
+        self.v_x = round(owner.moving_right * owner.speed*1.2 + owner.moving_left * -owner.speed*1.2)
+        self.v_y = round(owner.moving_up * -owner.speed*1.2 + owner.moving_down * owner.speed*1.2)
         if direction == 'UP':
             if not owner.moving_down:
                 self.v_y = round(
-                    owner.moving_up * -owner.speed*1.1 + owner.moving_down * owner.speed*1.1)- owner.projectile_speed
+                    owner.moving_up * -owner.speed*1.2 + owner.moving_down * owner.speed*1.2)- owner.projectile_speed
             else:
                 self.v_y = round(
-                    owner.moving_up * -owner.speed * 1.1 + owner.moving_down * owner.speed * 0.5) - owner.projectile_speed
-            self.v_x = round(owner.moving_right * owner.speed * 1.1 + owner.moving_left * -owner.speed * 1.1)
+                    owner.moving_up * -owner.speed * 1.2 + owner.moving_down * owner.speed * 0.5) - owner.projectile_speed
+            self.v_x = round(owner.moving_right * owner.speed * 1.2 + owner.moving_left * -owner.speed * 1.2)
 
         elif direction == 'DOWN':
             if not owner.moving_up:
                 self.v_y = round(
-                    owner.moving_up * -owner.speed * 1.1 + owner.moving_down * owner.speed * 1.1) + owner.projectile_speed
+                    owner.moving_up * -owner.speed * 1.2 + owner.moving_down * owner.speed * 1.2) + owner.projectile_speed
             else:
                 self.v_y = round(
-                    owner.moving_up * -owner.speed * 0.5 + owner.moving_down * owner.speed * 1.1) + owner.projectile_speed
-            self.v_x = round(owner.moving_right * owner.speed * 1.1 + owner.moving_left * -owner.speed * 1.1)
+                    owner.moving_up * -owner.speed * 0.5 + owner.moving_down * owner.speed * 1.2) + owner.projectile_speed
+            self.v_x = round(owner.moving_right * owner.speed * 1.2 + owner.moving_left * -owner.speed * 1.2)
 
         elif direction == 'LEFT':
             if not owner.moving_right:
                 self.v_x = round(
-                    owner.moving_right * owner.speed * 1.1 + owner.moving_left * -owner.speed * 1.1) - owner.projectile_speed
+                    owner.moving_right * owner.speed * 1.2 + owner.moving_left * -owner.speed * 1.2) - owner.projectile_speed
             else:
                 self.v_x = round(
-                    owner.moving_right * owner.speed * 0.5 + owner.moving_left * -owner.speed * 1.1) - owner.projectile_speed
-            self.v_y = round(owner.moving_up * -owner.speed * 1.1 + owner.moving_down * owner.speed * 1.1)
+                    owner.moving_right * owner.speed * 0.5 + owner.moving_left * -owner.speed * 1.2) - owner.projectile_speed
+            self.v_y = round(owner.moving_up * -owner.speed * 1.2 + owner.moving_down * owner.speed * 1.2)
 
         elif direction == 'RIGHT':
             if not owner.moving_left:
-                self.v_x = round(owner.moving_right * owner.speed * 1.1 + owner.moving_left * -owner.speed * 1.1) + owner.projectile_speed
+                self.v_x = round(owner.moving_right * owner.speed * 1.2 + owner.moving_left * -owner.speed * 1.2) + owner.projectile_speed
             else:
                 self.v_x = round(
-                    owner.moving_right * owner.speed * 1.1 + owner.moving_left * -owner.speed * 0.5) + owner.projectile_speed
-            self.v_y = round(owner.moving_up * -owner.speed*1.1 + owner.moving_down * owner.speed*1.1)
+                    owner.moving_right * owner.speed * 1.2 + owner.moving_left * -owner.speed * 0.5) + owner.projectile_speed
+            self.v_y = round(owner.moving_up * -owner.speed*1.2 + owner.moving_down * owner.speed*1.2)
 
         # projectile damage
         self.damage = damage

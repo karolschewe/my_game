@@ -9,15 +9,18 @@ class Game():
 
         # main class initialisation
         self.screen = Screen()
-        size_x, size_y = self.screen.carImg.get_size()
-        self.player = Player(self.screen.width,self.screen.height,size_x, size_y)
+
+        self.player = Player(self.screen.width,self.screen.height,'beniz.png')
         self.move_left = False
         self.move_right = False
         self.move_up = False
         self.move_down = False
         self.projectiles_vec = {}
+        self.enemy_projectiles_vec = {}
+        self.enemies_vec = {}
         self.no_of_projectiles = 0
         self.max_projectiles = 100
+        self.enemies_vec[1] = Walaszek(self.screen.width,self.screen.height,graphic_directory = 'Bartosz_Walaszek_boss.png',starting_x=120,starting_y = 120)
     # changing resolution
     def change_game_res(self,width,height):
         self.screen.change_resolution(width,height)
@@ -42,23 +45,30 @@ class Game():
         for event in event_list:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
-                    print("w")
                     tmp_proj = Projectile(self.player,'UP',10)
                     self.add_projectile(tmp_proj)
                 if event.key == pygame.K_s:
-                    print("s")
                     tmp_proj = Projectile(self.player,'DOWN',10)
                     self.add_projectile(tmp_proj)
                 if event.key == pygame.K_a:
-                    print("a")
                     tmp_proj = Projectile(self.player,'LEFT',10)
                     self.add_projectile(tmp_proj)
                 if event.key == pygame.K_d:
-                    print("d")
                     tmp_proj = Projectile(self.player,'RIGHT',10)
                     self.add_projectile(tmp_proj)
 
+    def remove_dead_bodies(self):
+        self.enemies_vec = {k: v for k, v in self.enemies_vec.items() if not v.dead}
 
+
+    def calculate_damage(self):
+        for k, v in self.projectiles_vec.items():
+            if not v.stopped:
+                for enemy in self.enemies_vec.values():
+                    if v.x > enemy.x and v.x < enemy.x + enemy.size_x and v.y > enemy.y and v.y < enemy.y + enemy.size_y:
+                        enemy.damage(v.damage)
+                        v.stopped = True
+                        break
 
 
 
@@ -108,7 +118,6 @@ class Game():
                 if not self.projectiles_vec[i].stopped:
                     self.projectiles_vec[i].timestep()
                     if self.projectiles_vec[i].v_x == 0 and self.projectiles_vec[i].v_y == 0:
-                        print(self.projectiles_vec[i].y)
                         self.projectiles_vec[i].stopped = True
 
 
@@ -118,7 +127,11 @@ class Game():
             self.player.discharge_movement_status()
             time.sleep(1/45)
             self.screen.screen.fill(self.screen.background_color)
-            self.screen.screen.blit(self.screen.carImg, (self.player.x, self.player.y))
+            self.screen.screen.blit(self.player.img, (self.player.x, self.player.y))
+            for enemy in self.enemies_vec.values():
+                self.screen.screen.blit(enemy.img,(enemy.x,enemy.y))
+            self.calculate_damage()
+            self.remove_dead_bodies()
             # pygame.draw.rect(self.screen.screen, (255, 0, 0), pygame.Rect(40, 40, 20, 20))
             for i in self.projectiles_vec.values():
                 if not i.stopped:
